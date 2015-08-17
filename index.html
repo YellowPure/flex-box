@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Flex Box Layout</title>
+        <style>
+            *{
+                margin: 0;
+                padding: 0;
+            }
+            body,html{
+                font-size: 24px;
+                font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            }
+            .main1{
+                height: 300px;
+            }
+            .box{
+                text-align: center;
+                font-size: 24px;
+                display: flex;
+                /*主轴方向 */
+                flex-direction: row;
+                height: 100%;
+                /*交叉轴上如何对齐 baseline时 若子元素中设置了line-height 会互相影响 */
+                align-items: flex-end;
+                /*主轴上对齐方式  space-around 每个项目的间隔相等*/
+                justify-content: space-around;
+                /*换行方式*/
+                flex-wrap: nowrap;
+                /*多根轴线对齐方式*/
+                align-content: flex-start;
+            }
+            .in-box{
+                width: 100px;
+                height: 80px;
+                line-height: 80px;
+                background: coral;
+                /*项目的放大比例 只放大了宽 默认0 如果一个项目的此属性为2 则占的剩余空间比1的多一倍*/
+                margin: 10px;
+            }
+            .inin-box{
+                width: 40px;
+                height: 30px;
+                background: chartreuse;
+                float: right;
+            }
+            .big{
+                width: 200px;
+                height: 160px;
+                line-height: 160px;
+                /*单个项目不一样的对齐方式 覆盖align-items 当align-items=baseline时 其他项目的该属性会失效*/
+                align-self: center;
+            }
+            .second{
+                /*项目的排列顺序 从0开始*/
+                order: 1;  
+                flex-grow: 1; 
+            }
+            .first{
+                /*项目的缩小比例 default 1 */
+                flex-shrink: 0;
+                order: 0;
+                /*项目占据的主轴空间 */
+                flex-basis: 240px;
+            }
+            .third{
+                order: 2;
+            }
+            
+            .main2{
+                height: 300px;
+                display: flex;
+            }
+            .flex-box{
+                display: flex;
+                width: 90px;
+                height: 90px;
+                background: #ddd;
+                border-radius: 20%;
+                margin: 5px;
+                padding: 10px;
+            }
+            .box1{
+                align-items: center;
+                justify-content: center;
+            }
+            .item{
+                width: 25px;
+                height: 25px;
+                border-radius: 50%;
+                color: #333;
+                background: #333;
+                box-shadow: 0 3px #666;
+            }
+            .box2{
+                flex-direction: column;
+                justify-content: space-between;
+            }
+            .box2 .item:nth-child(2){
+                align-self: flex-end;
+            }
+            .box3{
+                flex-direction: column;
+                justify-content: space-between;
+                align-items: flex-start;
+            }
+            .box3 .item.item:nth-child(2){
+                align-self: center;
+            }
+            .box3 .item:nth-child(3){
+                align-self: flex-end;
+            }
+            .box4{
+                justify-content: space-between;
+                flex-wrap: wrap;
+            }
+            .colum{
+                flex-basis: 100%;
+                display: flex;
+                justify-content: space-between;
+            }
+            .box4 .colum:nth-child(2){
+                align-self: flex-end;
+            }
+            .box5{
+                flex-wrap: wrap;
+            }
+            .box5 .row{
+                flex-basis: 100%;
+                display: flex;
+            }
+            .box5 .row:nth-child(1) {
+                justify-content: space-between;
+            }
+            .box5 .row:nth-child(2){
+                justify-content: center;
+            }
+            .box5 .row:nth-child(3){
+                justify-content: space-between;
+            }
+            .box6 {
+                flex-direction: column;
+                flex-wrap: wrap;
+                justify-content: space-between;
+                align-content: space-between;
+            }
+            
+            /*basic grid*/
+            .grid{
+                margin-bottom: 10px;
+                height: 150px;
+                text-align: center;
+                line-height: 150px;
+                display: flex;
+                flex-wrap: wrap;
+                background: #ddd;
+            }
+            .grid-cell{
+                flex:1;
+                margin: 10px;
+                background: lawngreen;
+            }
+            .u-1of3{
+                background: cadetblue;
+                flex: 0 0 33%;
+            }
+            .u-1of2{
+                background: cadetblue;
+                flex: 0 0 50%;
+            }
+            .u-1of4{
+                background: cadetblue;
+                flex: 0 0 25%;
+            }
+            
+            /*HolyGrail*/
+            article{
+                text-align: center;
+                display: flex;
+                min-height: 100vh;
+                flex-direction: column;
+                background: rgb(224, 223, 204);
+            }
+            header,footer{
+                background: rgb(102, 102, 102);
+                flex:1;
+            }
+            article>div{
+                display: flex;
+                flex:3;
+            }
+            main{
+                background: rgb(214, 214, 214);
+                flex: 1;
+            }
+            nav,aside{
+                flex:0 0 12em;
+            }
+            nav{
+                background: rgb(119, 187, 221);
+                order: -1;
+            }
+            aside{
+                background: rgb(225, 102, 51);
+            }
+            @media (max-width:768px){
+                article>div{
+                    flex-direction: column;
+                    flex:1;
+                }
+                main,aside,nax{
+                    flex:auto;
+                }
+            }
+            .input-box{
+                margin: 10px;
+                width: 200px;
+                height: 25px;
+                display: flex;
+            }
+            .input-field{
+                flex: 1;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="main1">
+            <div class="box">
+                <div class="in-box second">
+                    2
+                    <div class="inin-box"></div>
+                </div>
+                <div class="in-box first">1</div>
+                <div class="in-box big third">3</div>
+            </div>
+        </div>
+        <div class="main2">
+            <div class="flex-box box1">
+                <span class="item"></span>
+            </div>
+            <div class="flex-box box2">
+                <span class="item"></span>
+                <span class="item"></span>
+            </div>
+            <div class="flex-box box3">
+                <span class="item"></span>
+                <span class="item"></span>
+                <span class="item"></span>
+            </div>
+            <div class="flex-box box4">
+                <div class="colum">
+                    <span class="item"></span>
+                    <span class="item"></span>
+                </div>
+                <div class="colum">
+                    <span class="item"></span>
+                    <span class="item"></span>
+                </div>
+            </div>
+            <div class="flex-box box5">
+                <div class="row">
+                    <span class="item"></span>
+                    <span class="item"></span>
+                </div>
+                <div class="row">
+                    <span class="item"></span>
+                </div>
+                <div class="row">
+                    <span class="item"></span>
+                    <span class="item"></span>
+                </div>
+            </div>
+            <div class="flex-box box6">
+                <span class="item"></span>
+                <span class="item"></span>
+                <span class="item"></span>
+                <span class="item"></span>
+                <span class="item"></span>
+                <span class="item"></span>
+            </div>
+        </div>
+        <div class="grid">
+            <div class="grid-cell">1/2</div>
+            <div class="grid-cell">1/2</div>
+        </div>
+        <div class="grid">
+            <div class="grid-cell">1/3</div>
+            <div class="grid-cell">1/3</div>
+            <div class="grid-cell">1/3</div>
+        </div>
+        <div class="grid">
+            <div class="grid-cell">1/4</div>
+            <div class="grid-cell">1/4</div>
+            <div class="grid-cell">1/4</div>
+            <div class="grid-cell">1/4</div>
+        </div>
+        <div class="grid">
+            <div class="grid-cell">1/2</div>
+            <div class="grid-cell u-1of3">auto</div>
+            <div class="grid-cell u-1of3">auto</div>
+        </div>
+        <div class="grid">
+            <div class="grid-cell">1/4</div>
+            <div class="grid-cell u-1of2">auto</div>
+            <div class="grid-cell">1/3</div>
+        </div>    
+        <!--Holy Grail Layout-->
+        <article>
+            <header>#header</header>
+            <div>
+                <main>#center</main>
+                <nav>#left</nav>
+                <aside>#right</aside>
+            </div>
+            <footer>#footer</footer>
+        </article>
+        <div class="input-box">
+            <span class="input-item">label</span>
+            <input type="text" class="input-field" />
+            <button class="input-item">submit</button>
+        </div>
+    </body>
+</html>
